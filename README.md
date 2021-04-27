@@ -12,6 +12,8 @@ Interactive scatter plot of rating and price with drop down by Varietal
 Stacked bar chart with wine age, rating, and country
 Interactive table with search, filter, and sorting functionality
 
+https://docs.google.com/document/d/1_qrsc5Vl87I1mD744r62u2CWSzdEWOzNG9Y5OSv0Akg/edit?usp=sharing
+
 
 ![Diagram](diagram.png)
 
