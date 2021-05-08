@@ -1,35 +1,24 @@
-d3.json("./data/data.json").then((importedData) => {
-    var data = importedData;
-    console.log(data);
-
-    // d3.select("tbody")
-    // .selectAll("tr")
-    // .data(winedata_jn)
-    // .enter()
-    // .append("tr")
-    // .html(function(d) {
-    //   return `<td>${d.Country}</td><td>${d.County}</td><td>${d.Designation}</td><td>${d.Points}</td><td>${d.Price}</td><td>${d.Province}</td><td>${d.Title}</td><td>${d.Variety}</td><td>${d.Winery}</td><td>${d.Year}</td>`;
-    // });
+d3.json("api/wine_data").then((importedData) => {
+    console.log(importedData)
+    
+    d3.select("tbody")
+        .selectAll("tr")
+        .data(winedata_jn)
+        .enter()
+        .append("tr")
+        .html(function(d) {
+        return `<td>${d.Country}</td><td>${d.County}</td><td>${d.Designation}</td><td>${d.Points}</td><td>${d.Price}</td><td>${d.Province}</td><td>${d.Title}</td><td>${d.Variety}</td><td>${d.Winery}</td><td>${d.Year}</td>`;
+        });
 });
-
-var button = d3.select("#filter-btn");
-var form = d3.select("#form");
-
-// // Create event handlers 
-button.on("click", runEnter);
-form.on("submit", runEnter);
 
 function runEnter() {
     // Prevent the page from refreshing
-    
-    d3.event.preventDefault();
-    // tbody.html("");
+    if (d3.event) {
+        d3.event.preventDefault();
+    }
     
     var inputElement = d3.select("#input");
     var inputValue = inputElement.property("value");
-    // console.log(inputValue);
-    
-    
 
     var filteredData = winedata_jn.filter(date => date.Country === inputValue 
         // ||
@@ -44,7 +33,6 @@ function runEnter() {
         // date.Year === inputValue
         );
     
-
     filteredData.forEach(function(date) {
       var tbody=  d3.select("tbody")
         // .selectAll("tr")
@@ -54,7 +42,6 @@ function runEnter() {
         // .html(function(d) {
         //     return `<td>${d.Country}</td><td>${d.County}</td><td>${d.Designation}</td><td>${d.Points}</td><td>${d.Price}</td><td>${d.Province}</td><td>${d.Title}</td><td>${d.Variety}</td><td>${d.Winery}</td><td>${d.Year}</td>`;
         //   });
-    // //     console.log(f);
         var row = tbody.append("tr");
         Object.entries(date).forEach(function([key, value]) {
             // console.log(key, value);
@@ -63,6 +50,11 @@ function runEnter() {
         });
     });
 };
-// });
 
+runEnter()
 
+// Create event handlers 
+var button = d3.select("#filter-btn");
+var form = d3.select("#form");
+button.on("click", runEnter);
+form.on("submit", runEnter);
