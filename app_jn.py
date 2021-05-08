@@ -33,6 +33,8 @@ def home():
 
 @app.route("/api/wine_data")
 def wine_data():
+    wine_data = []
+    return wine_data
     
 
 # Query the database and send the jsonified results
