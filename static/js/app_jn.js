@@ -1,55 +1,24 @@
-var fs = require('fs');
- 
- 
-if (process.argv.length <= 2) {
-    console.log("Usage: " + __filename + " path/to/directory");
-    process.exit(-1);
-}
- 
-var path = process.argv[2];
- 
-fs.readdir(path, function(err, items) {
-    console.log(items);
- 
-    for (var i=0; i<items.length; i++) {
-        console.log(items[i]);
-    }
+d3.json("api/wine_data").then((importedData) => {
+    console.log(importedData)
+    
+    d3.select("tbody")
+        .selectAll("tr")
+        .data(winedata_jn)
+        .enter()
+        .append("tr")
+        .html(function(d) {
+        return `<td>${d.Country}</td><td>${d.County}</td><td>${d.Designation}</td><td>${d.Points}</td><td>${d.Price}</td><td>${d.Province}</td><td>${d.Title}</td><td>${d.Variety}</td><td>${d.Winery}</td><td>${d.Year}</td>`;
+        });
 });
-
-console.log('test')
-
-d3.csv("../../Data/Wines.csv").then((importedData) => {
-    var data = importedData;
-    console.log(data);
-s
-    // d3.select("tbody")
-    // .selectAll("tr")
-    // .data(winedata_jn)
-    // .enter()
-    // .append("tr")
-    // .html(function(d) {
-    //   return `<td>${d.Country}</td><td>${d.County}</td><td>${d.Designation}</td><td>${d.Points}</td><td>${d.Price}</td><td>${d.Province}</td><td>${d.Title}</td><td>${d.Variety}</td><td>${d.Winery}</td><td>${d.Year}</td>`;
-    // });
-});
-
-var button = d3.select("#filter-btn");
-var form = d3.select("#form");
-
-// // Create event handlers 
-button.on("click", runEnter);
-form.on("submit", runEnter);
 
 function runEnter() {
     // Prevent the page from refreshing
-    
-    d3.event.preventDefault();
-    // tbody.html("");
+    if (d3.event) {
+        d3.event.preventDefault();
+    }
     
     var inputElement = d3.select("#input");
     var inputValue = inputElement.property("value");
-    // console.log(inputValue);
-    
-    
 
     var filteredData = winedata_jn.filter(date => date.Country === inputValue 
         // ||
@@ -64,7 +33,6 @@ function runEnter() {
         // date.Year === inputValue
         );
     
-
     filteredData.forEach(function(date) {
       var tbody=  d3.select("tbody")
         // .selectAll("tr")
@@ -74,7 +42,6 @@ function runEnter() {
         // .html(function(d) {
         //     return `<td>${d.Country}</td><td>${d.County}</td><td>${d.Designation}</td><td>${d.Points}</td><td>${d.Price}</td><td>${d.Province}</td><td>${d.Title}</td><td>${d.Variety}</td><td>${d.Winery}</td><td>${d.Year}</td>`;
         //   });
-    // //     console.log(f);
         var row = tbody.append("tr");
         Object.entries(date).forEach(function([key, value]) {
             // console.log(key, value);
@@ -83,6 +50,11 @@ function runEnter() {
         });
     });
 };
-// });
 
+runEnter()
 
+// Create event handlers 
+var button = d3.select("#filter-btn");
+var form = d3.select("#form");
+button.on("click", runEnter);
+form.on("submit", runEnter);
