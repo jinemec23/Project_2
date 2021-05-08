@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wine Not?</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron" style="text-align: center">
+            <h1>Wine Not?</h1>
+            <p>Find your favorite wine!</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Look at all of the current wine options!</h2>
+                <div id="plot"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2><a href="/send">Add your wine choice!</a></h2>
+            </div>
+        </div>
+    </div>
+            <div class="container">
+            <div class="row margin-top-50">
+                <div class="col-md-2">
+                    <aside class="filters">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Filter by Date, City, State, Country or Shape</div>
+                            <div class="panel-body">
+                                <form id="form">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" id="input" class="form-control" placeholder="Enter Date, City, State, Country or Shape to Search">
+                                        <button id="filter-btn" type="button" class="btn btn-default">Filter</button></div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-md-10">
+                    <div id="table-area" class="">
+                        <table id="wine-table" class="table table-striped">
+                            <thead>
+                                <tr>
+                                          <th>Vintage</th>
+                                            <th>Country</th>
+                                            <th>County</th>
+                                            <th>Designation</th>
+                                            <th>Points</th>
+                                            <th>Price</th>
+                                            <th>Province</th>
+                                            <th>Title</th>
+                                            <th>Variety</th>
+                                            <th>Winery</th>
+                                            <th>Year</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="app_jn.js"></script>
+    <script src="winedata_jn.js"></script>
+</body>
+
+</html>
